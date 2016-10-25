@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 
 import jaco.mp3.player.MP3Player;
 
+
 public class ViewClass implements ActionListener {
 
 	private JFrame frmMyApplication;
@@ -22,8 +23,6 @@ public class ViewClass implements ActionListener {
 	private JButton btnStop = new JButton("STOP");
 	private JButton btnOpen = new JButton ("OPEN");
 	private JLabel lblNowPlaying = new JLabel("Now playing: no song");
-	private MP3Player player = new MP3Player(new File("/home/ivana/Music/prva_ljubav.mp3"));
-	private File file = new File("/home/ivana/Music/prva_ljubav.mp3");
 	final JFileChooser fileChooser = new JFileChooser();
 	private PlayerMethods pm = new PlayerMethods();
 	
@@ -77,9 +76,9 @@ public class ViewClass implements ActionListener {
 	}
 	
 	public void addActionListeners(){
-		//add action listener to btnBlack
+		//add action listener to btnPlay
 		btnPlay.addActionListener(this);
-		//add action listener to btnRed
+		//add action listener to btnPause
 		btnPause.addActionListener(this);
 		
 		btnStop.addActionListener(this);
@@ -89,13 +88,13 @@ public class ViewClass implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//add action performed to btnBlack
-		//add action performed to btnRed
+		
+		//add action performed to btnPlay
 		if(e.getSource()==btnPlay){
 		
 			pm.myPlay();
 			
-			//player.play();
+		
 			//lblNowPlaying.setText("Now playing: " + file.getName());
 		}
 		
@@ -103,32 +102,18 @@ public class ViewClass implements ActionListener {
 			
 			pm.myPause();
 			
-			//player.pause();
+			
 		}
 		
 		if(e.getSource()==btnStop){
 			
 			pm.myStop();
 			
-			//player.stop();
+			
 		}
 		
 		if(e.getSource()==btnOpen){
-			
-		//	pm.getPlayer();
-		//	pm.myOpen();
-			
-		/*	int returnVal = fileChooser.showOpenDialog(null);
-			if(returnVal == JFileChooser.APPROVE_OPTION){
-				//file sparar undan den valda filen
-				file = fileChooser.getSelectedFile();
-				MP3Player player= new MP3Player (file);
-				player.play();
-				lblNowPlaying.setText("Now playing: " + file);
-						
-			}	
-			*/
-		
+			pm.myStop();
 			JFileChooser fileChooser= new JFileChooser();
 			int returnVal = fileChooser.showOpenDialog(null);
 			if(returnVal == JFileChooser.APPROVE_OPTION){
@@ -137,7 +122,7 @@ public class ViewClass implements ActionListener {
 				
 				pm.setPlayer(new MP3Player (file));
 				pm.myOpen();
-				lblNowPlaying.setText("Now playing: " + file);
+				lblNowPlaying.setText("Now playing: " + file.getName());
 			}
 			
 		
