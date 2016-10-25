@@ -25,7 +25,7 @@ public class ViewClass implements ActionListener {
 	private MP3Player player = new MP3Player(new File("/home/ivana/Music/prva_ljubav.mp3"));
 	private File file = new File("/home/ivana/Music/prva_ljubav.mp3");
 	final JFileChooser fileChooser = new JFileChooser();
-	
+	private PlayerMethods pm = new PlayerMethods();
 	
 	/**
 	 * Launch the application.
@@ -92,21 +92,33 @@ public class ViewClass implements ActionListener {
 		//add action performed to btnBlack
 		//add action performed to btnRed
 		if(e.getSource()==btnPlay){
-			player.play();
-			lblNowPlaying.setText("Now playing: " + file.getName());
+		
+			pm.myPlay();
+			
+			//player.play();
+			//lblNowPlaying.setText("Now playing: " + file.getName());
 		}
 		
 		if(e.getSource()==btnPause){
-			player.pause();
+			
+			pm.myPause();
+			
+			//player.pause();
 		}
 		
 		if(e.getSource()==btnStop){
-			player.stop();
+			
+			pm.myStop();
+			
+			//player.stop();
 		}
 		
 		if(e.getSource()==btnOpen){
 			
-			int returnVal = fileChooser.showOpenDialog(null);
+		//	pm.getPlayer();
+		//	pm.myOpen();
+			
+		/*	int returnVal = fileChooser.showOpenDialog(null);
 			if(returnVal == JFileChooser.APPROVE_OPTION){
 				//file sparar undan den valda filen
 				file = fileChooser.getSelectedFile();
@@ -115,10 +127,22 @@ public class ViewClass implements ActionListener {
 				lblNowPlaying.setText("Now playing: " + file);
 						
 			}	
+			*/
+		
+			JFileChooser fileChooser= new JFileChooser();
+			int returnVal = fileChooser.showOpenDialog(null);
+			if(returnVal == JFileChooser.APPROVE_OPTION){
+				//file sparar undan den valda filen
+				File file = new File ("" + fileChooser.getSelectedFile());
+				
+				pm.setPlayer(new MP3Player (file));
+				pm.myOpen();
+				lblNowPlaying.setText("Now playing: " + file);
+			}
 			
-		}
 		
 	}
 	
+}
 }
 

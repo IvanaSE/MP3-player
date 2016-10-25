@@ -1,8 +1,4 @@
 package otherClasses;
-import java.io.File;
-
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 
 import interfaces.PlayerInterface;
 import jaco.mp3.player.MP3Player;
@@ -20,39 +16,30 @@ public class PlayerMethods implements PlayerInterface{
 	}
 
 	@Override
-	public void open() {
-		JFileChooser fileChooser= new JFileChooser();
-		int returnVal = fileChooser.showOpenDialog(null);
-		if(returnVal == JFileChooser.APPROVE_OPTION){
-			//file sparar undan den valda filen
-			File file = new File ("" + fileChooser.getSelectedFile());
-			mp3player.stop();
-			mp3player= new MP3Player (file);
-			mp3player.play();
-			JLabel lblNowPlaying = new JLabel();
-			lblNowPlaying.setText("Now playing: " + file.getName());
-		
-		}
-	}
-
-	@Override
-	public void play() {
-		final MP3Player player = new MP3Player(new File("null"));
-		player.play();
+	public void myOpen() {
+		mp3player.stop();
+		mp3player.play();
 		
 	}
 
 	@Override
-	public void pause() {
-		final MP3Player player = new MP3Player(new File("null"));
-		player.pause();
+	public void myPlay() {
+		
+		mp3player.play();
 		
 	}
 
 	@Override
-	public void stop() {
-		final MP3Player player = new MP3Player(new File("null"));
-		player.stop();
+	public void myPause() {
+	
+		mp3player.pause();
+		
+	}
+
+	@Override
+	public void myStop() {
+		
+		mp3player.stop();
 		
 		
 	}

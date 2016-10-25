@@ -2,12 +2,12 @@ package interfaces;
 
 public interface PlayerInterface {
 	
-	public void open();
+	public void myOpen();
 	
-	public void play();
+	public void myPlay();
 	
-	public void pause();
+	public void myPause();
 	
-	public void stop();
+	public void myStop();
 
 }
