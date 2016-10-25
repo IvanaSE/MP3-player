@@ -68,9 +68,9 @@ public class ViewClass implements ActionListener {
 	}
 	
 	public void addComponentsToFrame(){
-		frmMyApplication.getContentPane().add(btnPlay);
-		frmMyApplication.getContentPane().add(btnPause);
-		frmMyApplication.getContentPane().add(btnStop);
+		frmMyApplication.getContentPane().add(btnPlay).setEnabled(false);
+		frmMyApplication.getContentPane().add(btnPause).setEnabled(false);
+		frmMyApplication.getContentPane().add(btnStop).setEnabled(false);
 		frmMyApplication.getContentPane().add(btnOpen);
 		frmMyApplication.getContentPane().add(lblNowPlaying);
 	}
@@ -113,19 +113,21 @@ public class ViewClass implements ActionListener {
 		}
 		
 		if(e.getSource()==btnOpen){
-			pm.myStop();
+			//pm.myStop();
 			JFileChooser fileChooser= new JFileChooser();
 			int returnVal = fileChooser.showOpenDialog(null);
 			if(returnVal == JFileChooser.APPROVE_OPTION){
 				//file sparar undan den valda filen
 				File file = new File ("" + fileChooser.getSelectedFile());
-				
+				pm.myStop();
 				pm.setPlayer(new MP3Player (file));
 				pm.myOpen();
 				lblNowPlaying.setText("Now playing: " + file.getName());
-			}
 			
-		
+				btnPlay.setEnabled(true);
+				btnPause.setEnabled(true);
+				btnStop.setEnabled(true);
+			}
 	}
 	
 }

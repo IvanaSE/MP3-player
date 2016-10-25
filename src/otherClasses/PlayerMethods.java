@@ -17,7 +17,7 @@ public class PlayerMethods implements PlayerInterface{
 
 	@Override
 	public void myOpen() {
-		mp3player.stop();
+		
 		mp3player.play();
 		
 	}
