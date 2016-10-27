@@ -23,20 +23,9 @@ public class ViewClass implements ActionListener {
 	private JButton btnStop = new JButton("STOP");
 	private JButton btnOpen = new JButton ("OPEN");
 	private JLabel lblNowPlaying = new JLabel("Now playing: no song");
-	final JFileChooser fileChooser = new JFileChooser();
 	private PlayerMethods pm = new PlayerMethods();
 	
-	/**
-	 * Launch the application.
-	 */
 	
-//flyttad till Main classen  
- 	/*Main method
-	public static void main(String[] args) {
-					ViewClass window = new ViewClass();
-					window.frmMyApplication.setVisible(true);
-	}
-*/
 	/**
 	 * Create the application.
 	 */
@@ -93,43 +82,43 @@ public class ViewClass implements ActionListener {
 		if(e.getSource()==btnPlay){
 		
 			pm.myPlay();
-			
-		
-			//lblNowPlaying.setText("Now playing: " + file.getName());
 		}
 		
 		if(e.getSource()==btnPause){
 			
-			pm.myPause();
-			
-			
+			pm.myPause();	
 		}
 		
 		if(e.getSource()==btnStop){
 			
-			pm.myStop();
-			
-			
+			pm.myStop();	
 		}
 		
 		if(e.getSource()==btnOpen){
-			//pm.myStop();
+			
 			JFileChooser fileChooser= new JFileChooser();
 			int returnVal = fileChooser.showOpenDialog(null);
+			
 			if(returnVal == JFileChooser.APPROVE_OPTION){
 				//file sparar undan den valda filen
+				
 				File file = new File ("" + fileChooser.getSelectedFile());
-				pm.myStop();
-				pm.setPlayer(new MP3Player (file));
-				pm.myOpen();
-				lblNowPlaying.setText("Now playing: " + file.getName());
+				
+				if (file.toString().contains(".mp3")){
+					pm.myStop();
+					pm.setPlayer(new MP3Player (file));
+					pm.myOpen();
+					lblNowPlaying.setText("Now playing: " + file.getName());
 			
-				btnPlay.setEnabled(true);
-				btnPause.setEnabled(true);
-				btnStop.setEnabled(true);
+					btnPlay.setEnabled(true);
+					btnPause.setEnabled(true);
+					btnStop.setEnabled(true);
+				}else{
+					lblNowPlaying.setText("Cannot play that file, please choose a file in mp3 format.");
+				}
 			}
-	}
+		}
 	
-}
+	}
 }
 
