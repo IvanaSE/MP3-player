@@ -1,7 +1,5 @@
 package otherClasses;
 
-
-
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,8 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import jaco.mp3.player.MP3Player;
-
-
+/**
+ * This class is a GUI class.
+ * @author IvanaSE
+ * @version 1.0
+ */
 public class ViewClass implements ActionListener {
 
 	private JFrame frmMyApplication;
@@ -24,11 +25,13 @@ public class ViewClass implements ActionListener {
 	private JButton btnOpen = new JButton ("OPEN");
 	private JLabel lblNowPlaying = new JLabel("Now playing: no song");
 	private PlayerMethods pm = new PlayerMethods();
+	private String choosenFileName = "";
 	
 	
 	/**
-	 * Create the application.
+	 * constructor - creates GUI with all components
 	 */
+	
 	public ViewClass() {
 		createGUI();
 		addComponentsToFrame();
@@ -36,7 +39,7 @@ public class ViewClass implements ActionListener {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * method createGUI that initialize frame, buttons and makes it visible
 	 */
 	private void createGUI() {
 		frmMyApplication = new JFrame();
@@ -56,6 +59,9 @@ public class ViewClass implements ActionListener {
 		
 	}
 	
+	/**
+	 * method addComponentsToFrame adds all components to frame
+	 */
 	public void addComponentsToFrame(){
 		frmMyApplication.getContentPane().add(btnPlay).setEnabled(false);
 		frmMyApplication.getContentPane().add(btnPause).setEnabled(false);
@@ -64,6 +70,9 @@ public class ViewClass implements ActionListener {
 		frmMyApplication.getContentPane().add(lblNowPlaying);
 	}
 	
+	/**
+	 * method addActionListeners adds listeners to buttons and label
+	 */
 	public void addActionListeners(){
 		//add action listener to btnPlay
 		btnPlay.addActionListener(this);
@@ -74,26 +83,33 @@ public class ViewClass implements ActionListener {
 		
 		btnOpen.addActionListener(this);
 	}
-
+	/**
+	 * method actionPerformed
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		//add action performed to btnPlay
+		//add action performed to btnPlay and changes label for every new file
 		if(e.getSource()==btnPlay){
 		
 			pm.myPlay();
+			lblNowPlaying.setText("Now playing: " + choosenFileName);
 		}
 		
 		if(e.getSource()==btnPause){
 			
-			pm.myPause();	
+			pm.myPause();
+			lblNowPlaying.setText("Paused: " + choosenFileName);
 		}
 		
 		if(e.getSource()==btnStop){
 			
-			pm.myStop();	
+			pm.myStop();
+			lblNowPlaying.setText("Stopped: " + choosenFileName);
 		}
 		
+		
+		//actionPerformed on Open button
 		if(e.getSource()==btnOpen){
 			
 			JFileChooser fileChooser= new JFileChooser();
@@ -103,12 +119,13 @@ public class ViewClass implements ActionListener {
 				//file sparar undan den valda filen
 				
 				File file = new File ("" + fileChooser.getSelectedFile());
-				
+				choosenFileName = file.getName();
+				//check if file is of right type
 				if (file.toString().contains(".mp3")){
 					pm.myStop();
 					pm.setPlayer(new MP3Player (file));
 					pm.myOpen();
-					lblNowPlaying.setText("Now playing: " + file.getName());
+					lblNowPlaying.setText("Now playing: " + choosenFileName);
 			
 					btnPlay.setEnabled(true);
 					btnPause.setEnabled(true);
