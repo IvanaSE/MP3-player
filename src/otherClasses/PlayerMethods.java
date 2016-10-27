@@ -28,7 +28,7 @@ public class PlayerMethods implements PlayerInterface{
 	/**
 	 * sets music playing
 	 */
-	@Override
+	//@Override
 	public void myOpen() {
 		
 		mp3player.play();
@@ -37,7 +37,7 @@ public class PlayerMethods implements PlayerInterface{
 	/**
 	 * sets music playing
 	 */
-	@Override
+	//@Override
 	public void myPlay() {
 		
 		mp3player.play();
@@ -46,7 +46,7 @@ public class PlayerMethods implements PlayerInterface{
 	/**
 	 * pauses the music
 	 */
-	@Override
+	//@Override
 	public void myPause() {
 	
 		mp3player.pause();
@@ -55,7 +55,7 @@ public class PlayerMethods implements PlayerInterface{
 	/**
 	 * pauses the music
 	 */
-	@Override
+	//@Override
 	public void myStop() {
 		
 		mp3player.stop();
